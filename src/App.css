@@ -1,0 +1,215 @@
+/* Base Mobile Rules */
+.app-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: max-width 0.3s ease, padding 0.3s ease;
+}
+
+/* Header Styles */
+.app-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-icon {
+  color: var(--accent-cyan);
+}
+
+.app-header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* Base Card Block */
+.ui-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.card-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+/* Gender Selection Cards Grid */
+.gender-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gender-card {
+  height: 90px;
+  cursor: pointer;
+  border: 1px solid var(--card-border);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.gender-card.active {
+  border-color: var(--accent-blue);
+  background: var(--accent-glow);
+}
+
+.gender-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Height Control Section */
+.height-card {
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.unit-selector {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  margin-bottom: 4px;
+}
+
+.unit-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unit-btn.active {
+  background-color: var(--accent-blue);
+  color: #ffffff;
+}
+
+.numeric-display {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.unit-subtext {
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* Dual Grid: Weight & Age */
+.inputs-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.control-card {
+  min-height: 110px;
+}
+
+/* Main Form Content Area */
+.main-content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Action Button Area */
+.action-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.btn-primary-calculate {
+  background: linear-gradient(135deg, var(--accent-blue), #1d6ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(47, 129, 247, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary-calculate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(47, 129, 247, 0.4);
+}
+
+.btn-primary-calculate:active {
+  transform: translateY(1px);
+}
+
+/* =======================================================
+   TABLET & DESKTOP RESPONSIVE BREAKPOINT (≥ 768px)
+   ======================================================= */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 800px;
+    padding: 32px;
+    border-radius: 32px;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.875rem;
+  }
+
+  /* Split into side-by-side dashboard grid on desktop */
+  .main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+}
