@@ -213,3 +213,98 @@
     align-items: start;
   }
 }
+
+/* Form Top Control Bar */
+.calculator-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.section-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.btn-reset {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78125rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+  color: var(--accent-cyan);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Card Top Row */
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Controlled Input Fields Styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.numeric-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-main);
+  font-size: 1.85rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  max-width: 120px;
+  padding: 2px 0;
+  outline: none;
+  font-family: var(--font-family);
+  transition: border-color 0.2s ease;
+}
+
+.numeric-input:focus {
+  border-bottom-color: var(--accent-blue);
+}
+
+/* Chrome, Safari, Edge, Opera remove number input arrows */
+.numeric-input::-webkit-outer-spin-button,
+.numeric-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox remove number input arrows */
+.numeric-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.dual-input-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
