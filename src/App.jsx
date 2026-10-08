@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import CalculatorForm from './components/CalculatorForm';
+import { calculateBMI } from './utils/bmiCalculator';
 import './App.css';
 
 function App() {
@@ -17,6 +18,29 @@ function App() {
   
   const [age, setAge] = useState('25');
 
+  // State for calculation result
+  const [bmiResult, setBmiResult] = useState(null);
+
+  // Calculation Trigger Handler
+  const handleCalculate = () => {
+    const result = calculateBMI({
+      weight,
+      weightUnit,
+      heightUnit,
+      heightCm,
+      heightM,
+      heightFt,
+      heightIn
+    });
+
+    if (result) {
+      setBmiResult(result);
+      console.log('Calculated BMI Result:', result);
+    } else {
+      alert('Please enter valid numeric values for height and weight.');
+    }
+  };
+
   // Reset Handler Function
   const handleReset = () => {
     setGender('male');
@@ -28,6 +52,7 @@ function App() {
     setHeightFt('5');
     setHeightIn('9');
     setAge('25');
+    setBmiResult(null);
   };
 
   return (
@@ -63,7 +88,7 @@ function App() {
         {/* Right Column Action CTA */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
           <div className="action-area" style={{ width: '100%' }}>
-            <button className="btn-primary-calculate">
+            <button className="btn-primary-calculate" onClick={handleCalculate}>
               Calculate BMI
             </button>
           </div>
