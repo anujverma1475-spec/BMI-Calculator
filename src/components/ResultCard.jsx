@@ -1,5 +1,6 @@
 import React from 'react';
 import { RotateCcw, Info } from 'lucide-react';
+import BMIScale from './BMIScale';
 
 function ResultCard({ result, onRecalculate }) {
   if (!result) return null;
@@ -9,7 +10,7 @@ function ResultCard({ result, onRecalculate }) {
       <div className="result-top-action">
         <button className="btn-recalculate" onClick={onRecalculate} title="Recalculate">
           <RotateCcw size={16} />
-          <span>Height</span>
+          <span>Recalculate</span>
         </button>
       </div>
 
@@ -26,10 +27,13 @@ function ResultCard({ result, onRecalculate }) {
           {result.category}
         </div>
 
+        {/* Interactive BMI Scale Component */}
+        <BMIScale bmi={result.bmi} />
+
         <div className="result-summary-pills">
-          <span>Height: {result.heightMeters * 100} centimeters</span>
+          <span>Height: {result.heightMeters * 100} cm</span>
           <span>•</span>
-          <span>Weight: {result.weightKg} kilograms</span>
+          <span>Weight: {result.weightKg} kg</span>
         </div>
 
         <div className="bmi-disclaimer-box">
