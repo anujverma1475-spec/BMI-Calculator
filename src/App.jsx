@@ -3,6 +3,7 @@ import Header from './components/Header';
 import CalculatorForm from './components/CalculatorForm';
 import ResultCard from './components/ResultCard';
 import History from './components/History';
+import Footer from './components/Footer';
 import { calculateBMI } from './utils/bmiCalculator';
 import { AlertCircle } from 'lucide-react';
 import './App.css';
@@ -128,7 +129,8 @@ function App() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            {/* Right Column: History Section (Stretches vertically on desktop) */}
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
               <History historyList={historyList} onClearHistory={handleClearHistory} />
             </div>
           </>
@@ -139,6 +141,9 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Developer Branding Footer */}
+      <Footer />
     </div>
   );
 }

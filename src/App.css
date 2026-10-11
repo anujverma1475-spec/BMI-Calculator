@@ -547,7 +547,7 @@
 }
 
 /* =======================================================
-   HISTORY SECTION STYLES
+   HISTORY SECTION STYLES (Fills vertical desktop space)
    ======================================================= */
 .history-container {
   background-color: rgba(255, 255, 255, 0.02);
@@ -558,6 +558,8 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .history-header {
@@ -603,7 +605,7 @@
 }
 
 .history-empty-state {
-  padding: 24px 16px;
+  padding: 28px 16px;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.8125rem;
@@ -611,13 +613,18 @@
   background: rgba(255, 255, 255, 0.01);
   border: 1px dashed var(--card-border);
   border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 .history-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 220px;
+  flex: 1;
+  max-height: 380px;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -675,8 +682,89 @@
 }
 
 /* =======================================================
+   DESIGNER FOOTER BAR (ANUJ VERMA BRANDING)
+   ======================================================= */
+.app-footer {
+  margin-top: 12px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.footer-credit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.footer-code-icon {
+  color: var(--accent-cyan);
+}
+
+.developer-name {
+  color: #58a6ff;
+  font-weight: 700;
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.78125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.github-btn {
+  color: var(--text-main);
+}
+
+.github-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.linkedin-btn {
+  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.linkedin-btn:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.social-icon {
+  flex-shrink: 0;
+}
+
+/* =======================================================
    ERROR BANNER & ACCESSIBILITY STYLES
-   ================================================------- */
+   ======================================================= */
 .error-banner {
   background-color: rgba(214, 92, 92, 0.15);
   border: 1px solid rgba(214, 92, 92, 0.4);
@@ -704,7 +792,7 @@ input:focus-visible {
 }
 
 /* =======================================================
-   TABLET & DESKTOP RESPONSIVE BREAKPOINT (≥ 768px)
+   DESKTOP RESPONSIVE GRID ALIGNMENT (≥ 768px)
    ======================================================= */
 @media (min-width: 768px) {
   .app-container {
@@ -721,6 +809,6 @@ input:focus-visible {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
   }
 }
