@@ -1,63 +1,62 @@
 /**
- * Converts user weight input to Kilograms (kg)
+ * Converts user weight input to Kilograms (kg) with validation
  */
 export const convertWeightToKg = (weight, unit) => {
   const numWeight = parseFloat(weight);
-  if (isNaN(numWeight) || numWeight <= 0) return 0;
+  if (isNaN(numWeight) || numWeight <= 0 || numWeight > 500) return null; // Realistic max weight 500kg
 
   if (unit === 'lb') {
     return numWeight * 0.45359237;
   }
-  return numWeight; // Default is already 'kg'
+  return numWeight;
 };
 
 /**
- * Converts user height input to Meters (m)
+ * Converts user height input to Meters (m) with validation
  */
 export const convertHeightToMeters = (unit, cm, m, ft, inch) => {
   if (unit === 'cm') {
     const numCm = parseFloat(cm);
-    if (isNaN(numCm) || numCm <= 0) return 0;
+    if (isNaN(numCm) || numCm < 50 || numCm > 250) return null; // Realistic human height range 50cm - 250cm
     return numCm / 100;
   }
 
   if (unit === 'm') {
     const numM = parseFloat(m);
-    if (isNaN(numM) || numM <= 0) return 0;
+    if (isNaN(numM) || numM < 0.5 || numM > 2.5) return null;
     return numM;
   }
 
   if (unit === 'ft') {
     const numFt = parseFloat(ft) || 0;
     const numIn = parseFloat(inch) || 0;
-    if (numFt <= 0 && numIn <= 0) return 0;
+    if (numFt <= 0 && numIn <= 0) return null;
+    if (numFt < 1 || numFt > 8 || numIn < 0 || numIn > 11) return null;
     
-    // 1 ft = 0.3048 m, 1 inch = 0.0254 m
     return numFt * 0.3048 + numIn * 0.0254;
   }
 
-  return 0;
+  return null;
 };
 
 /**
- * Calculates BMI value and identifies category
+ * Calculates BMI value and identifies category with error feedback
  */
 export const calculateBMI = ({ weight, weightUnit, heightUnit, heightCm, heightM, heightFt, heightIn }) => {
   const weightKg = convertWeightToKg(weight, weightUnit);
   const heightMeters = convertHeightToMeters(heightUnit, heightCm, heightM, heightFt, heightIn);
 
-  // Guard Clause: Prevent divide-by-zero or negative inputs
-  if (weightKg <= 0 || heightMeters <= 0) {
-    return null;
+  if (weightKg === null || heightMeters === null || heightMeters <= 0) {
+    return { error: 'Please enter realistic, valid numbers for your height and weight.' };
   }
 
-  // Formula: BMI = kg / (m * m)
   const rawBmi = weightKg / (heightMeters * heightMeters);
-  
-  // Format to 1 decimal place (e.g. 21.4)
   const bmiValue = parseFloat(rawBmi.toFixed(1));
 
-  // Determine Category
+  if (bmiValue < 5 || bmiValue > 100) {
+    return { error: 'Calculated BMI is out of normal human bounds. Please check your inputs.' };
+  }
+
   let category = '';
   let color = '';
 

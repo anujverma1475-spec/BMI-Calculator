@@ -641,3 +641,24 @@
   font-size: 0.6875rem;
   color: var(--text-muted);
 }
+
+/* Error Notification Banner */
+.error-banner {
+  background-color: rgba(214, 92, 92, 0.15);
+  border: 1px solid rgba(214, 92, 92, 0.4);
+  color: #f87171;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
