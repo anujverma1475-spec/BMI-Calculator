@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import CalculatorForm from './components/CalculatorForm';
+import ResultCard from './components/ResultCard';
 import { calculateBMI } from './utils/bmiCalculator';
 import './App.css';
 
@@ -35,7 +36,6 @@ function App() {
 
     if (result) {
       setBmiResult(result);
-      console.log('Calculated BMI Result:', result);
     } else {
       alert('Please enter valid numeric values for height and weight.');
     }
@@ -62,37 +62,46 @@ function App() {
 
       {/* Main Responsive Layout */}
       <div className="main-content-grid">
-        {/* Form Inputs Component */}
-        <CalculatorForm
-          gender={gender}
-          setGender={setGender}
-          weight={weight}
-          setWeight={setWeight}
-          weightUnit={weightUnit}
-          setWeightUnit={setWeightUnit}
-          heightUnit={heightUnit}
-          setHeightUnit={setHeightUnit}
-          heightCm={heightCm}
-          setHeightCm={setHeightCm}
-          heightM={heightM}
-          setHeightM={setHeightM}
-          heightFt={heightFt}
-          setHeightFt={setHeightFt}
-          heightIn={heightIn}
-          setHeightIn={setHeightIn}
-          age={age}
-          setAge={setAge}
-          onReset={handleReset}
-        />
+        {!bmiResult ? (
+          <>
+            {/* Left Column: Form Inputs Component */}
+            <CalculatorForm
+              gender={gender}
+              setGender={setGender}
+              weight={weight}
+              setWeight={setWeight}
+              weightUnit={weightUnit}
+              setWeightUnit={setWeightUnit}
+              heightUnit={heightUnit}
+              setHeightUnit={setHeightUnit}
+              heightCm={heightCm}
+              setHeightCm={setHeightCm}
+              heightM={heightM}
+              setHeightM={setHeightM}
+              heightFt={heightFt}
+              setHeightFt={setHeightFt}
+              heightIn={heightIn}
+              setHeightIn={setHeightIn}
+              age={age}
+              setAge={setAge}
+              onReset={handleReset}
+            />
 
-        {/* Right Column Action CTA */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
-          <div className="action-area" style={{ width: '100%' }}>
-            <button className="btn-primary-calculate" onClick={handleCalculate}>
-              Calculate BMI
-            </button>
+            {/* Right Column Action CTA */}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
+              <div className="action-area" style={{ width: '100%' }}>
+                <button className="btn-primary-calculate" onClick={handleCalculate}>
+                  Calculate BMI
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* When calculation is complete, show the result card spanning full width */
+          <div style={{ gridColumn: '1 / -1' }}>
+            <ResultCard result={bmiResult} onRecalculate={() => setBmiResult(null)} />
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
