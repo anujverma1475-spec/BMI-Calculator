@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Color Theme matching reference image */
   --bg-color: #0d1117;
   --card-bg: #161b22;
   --card-border: #30363d;
@@ -39,7 +38,7 @@ body {
 
 #root {
   width: 100%;
-  max-width: 850px; /* Expands on desktop */
+  max-width: 850px;
   display: flex;
   justify-content: center;
 }

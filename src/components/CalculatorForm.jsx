@@ -1,5 +1,5 @@
-import React from "react";
-import { RotateCcw } from "lucide-react";
+import React from 'react';
+import { RotateCcw } from 'lucide-react';
 
 function CalculatorForm({
   gender,
@@ -20,11 +20,10 @@ function CalculatorForm({
   setHeightIn,
   age,
   setAge,
-  onReset,
+  onReset
 }) {
   return (
     <div className="calculator-form-container">
-      {/* Top Header Controls / Reset */}
       <div className="form-top-bar">
         <span className="section-subtitle">Input Details</span>
         <button className="btn-reset" onClick={onReset} title="Reset Form">
@@ -33,50 +32,47 @@ function CalculatorForm({
         </button>
       </div>
 
-      {/* Gender Selection Cards */}
       <div className="gender-grid">
         <div
-          className={`ui-card gender-card ${gender === "male" ? "active" : ""}`}
-          onClick={() => setGender("male")}
+          className={`ui-card gender-card ${gender === 'male' ? 'active' : ''}`}
+          onClick={() => setGender('male')}
         >
           <span className="gender-label">Male</span>
         </div>
         <div
-          className={`ui-card gender-card ${gender === "female" ? "active" : ""}`}
-          onClick={() => setGender("female")}
+          className={`ui-card gender-card ${gender === 'female' ? 'active' : ''}`}
+          onClick={() => setGender('female')}
         >
           <span className="gender-label">Female</span>
         </div>
       </div>
 
-      {/* Height Section */}
       <div className="ui-card height-card">
         <div className="card-top-row">
           <span className="card-label">Height</span>
           <div className="unit-selector">
             <button
-              className={`unit-btn ${heightUnit === "cm" ? "active" : ""}`}
-              onClick={() => setHeightUnit("cm")}
+              className={`unit-btn ${heightUnit === 'cm' ? 'active' : ''}`}
+              onClick={() => setHeightUnit('cm')}
             >
               cm
             </button>
             <button
-              className={`unit-btn ${heightUnit === "m" ? "active" : ""}`}
-              onClick={() => setHeightUnit("m")}
+              className={`unit-btn ${heightUnit === 'm' ? 'active' : ''}`}
+              onClick={() => setHeightUnit('m')}
             >
               m
             </button>
             <button
-              className={`unit-btn ${heightUnit === "ft" ? "active" : ""}`}
-              onClick={() => setHeightUnit("ft")}
+              className={`unit-btn ${heightUnit === 'ft' ? 'active' : ''}`}
+              onClick={() => setHeightUnit('ft')}
             >
               ft/in
             </button>
           </div>
         </div>
 
-        {/* Dynamic Input based on selected Height Unit */}
-        {heightUnit === "cm" && (
+        {heightUnit === 'cm' && (
           <div className="input-group">
             <input
               type="number"
@@ -90,7 +86,7 @@ function CalculatorForm({
           </div>
         )}
 
-        {heightUnit === "m" && (
+        {heightUnit === 'm' && (
           <div className="input-group">
             <input
               type="number"
@@ -105,7 +101,7 @@ function CalculatorForm({
           </div>
         )}
 
-        {heightUnit === "ft" && (
+        {heightUnit === 'ft' && (
           <div className="dual-input-row">
             <div className="input-group">
               <input
@@ -134,22 +130,20 @@ function CalculatorForm({
         )}
       </div>
 
-      {/* Dual Inputs: Weight & Age */}
       <div className="inputs-dual-grid">
-        {/* Weight Control Card */}
         <div className="ui-card control-card">
           <div className="card-top-row">
             <span className="card-label">Weight</span>
             <div className="unit-selector">
               <button
-                className={`unit-btn ${weightUnit === "kg" ? "active" : ""}`}
-                onClick={() => setWeightUnit("kg")}
+                className={`unit-btn ${weightUnit === 'kg' ? 'active' : ''}`}
+                onClick={() => setWeightUnit('kg')}
               >
                 kg
               </button>
               <button
-                className={`unit-btn ${weightUnit === "lb" ? "active" : ""}`}
-                onClick={() => setWeightUnit("lb")}
+                className={`unit-btn ${weightUnit === 'lb' ? 'active' : ''}`}
+                onClick={() => setWeightUnit('lb')}
               >
                 lb
               </button>
@@ -161,19 +155,16 @@ function CalculatorForm({
               className="numeric-input"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              placeholder={weightUnit === "kg" ? "70" : "154"}
+              placeholder={weightUnit === 'kg' ? '70' : '154'}
               min="1"
             />
-            <span className="unit-subtext">
-              {weightUnit === "kg" ? "kilograms" : "pounds"}
-            </span>
+            <span className="unit-subtext">{weightUnit === 'kg' ? 'kilograms' : 'pounds'}</span>
           </div>
         </div>
 
-        {/* Age Control Card */}
         <div className="ui-card control-card">
           <span className="card-label">Age</span>
-          <div className="input-group" style={{ marginTop: "18px" }}>
+          <div className="input-group" style={{ marginTop: '18px' }}>
             <input
               type="number"
               className="numeric-input"

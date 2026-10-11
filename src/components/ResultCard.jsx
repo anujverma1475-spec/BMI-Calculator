@@ -1,9 +1,11 @@
 import React from 'react';
-import { RotateCcw, Info } from 'lucide-react';
+import { RotateCcw, Info, TrendingDown, TrendingUp, CheckCircle } from 'lucide-react';
 import BMIScale from './BMIScale';
 
 function ResultCard({ result, onRecalculate }) {
   if (!result) return null;
+
+  const { weightDifference } = result;
 
   return (
     <div className="result-overlay-card">
@@ -27,11 +29,35 @@ function ResultCard({ result, onRecalculate }) {
           {result.category}
         </div>
 
-        {/* Interactive BMI Scale Component */}
+        {weightDifference && (
+          <div className="weight-target-box">
+            {weightDifference.type === 'underweight' && (
+              <div className="target-pill gain">
+                <TrendingUp size={18} className="target-icon" />
+                <span>Gain <strong>{weightDifference.kg} kg ({weightDifference.lbs} lbs)</strong> to reach a healthy weight</span>
+              </div>
+            )}
+
+            {(weightDifference.type === 'overweight' || weightDifference.type === 'obese') && (
+              <div className="target-pill lose">
+                <TrendingDown size={18} className="target-icon" />
+                <span>Lose <strong>{weightDifference.kg} kg ({weightDifference.lbs} lbs)</strong> to reach a healthy weight</span>
+              </div>
+            )}
+
+            {weightDifference.type === 'healthy' && (
+              <div className="target-pill healthy">
+                <CheckCircle size={18} className="target-icon" />
+                <span>You are within the healthy weight range!</span>
+              </div>
+            )}
+          </div>
+        )}
+
         <BMIScale bmi={result.bmi} />
 
         <div className="result-summary-pills">
-          <span>Height: {result.heightMeters * 100} cm</span>
+          <span>Height: {Math.round(result.heightMeters * 100)} cm</span>
           <span>•</span>
           <span>Weight: {result.weightKg} kg</span>
         </div>
@@ -39,8 +65,8 @@ function ResultCard({ result, onRecalculate }) {
         <div className="bmi-disclaimer-box">
           <Info size={16} className="disclaimer-icon" />
           <p>
-            A BMI of {result.bmi} is in the <strong>{result.category}</strong> category for adults of your height. 
-            BMI is a screening measure and has limitations. It is not a medical diagnosis.
+            A healthy weight for your height is between <strong>{result.minHealthyKg} kg</strong> and <strong>{result.maxHealthyKg} kg</strong>. 
+            BMI is a screening measure and not a medical diagnosis.
           </p>
         </div>
       </div>

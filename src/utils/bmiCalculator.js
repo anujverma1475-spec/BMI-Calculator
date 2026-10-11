@@ -3,7 +3,7 @@
  */
 export const convertWeightToKg = (weight, unit) => {
   const numWeight = parseFloat(weight);
-  if (isNaN(numWeight) || numWeight <= 0 || numWeight > 500) return null; // Realistic max weight 500kg
+  if (isNaN(numWeight) || numWeight <= 0 || numWeight > 500) return null;
 
   if (unit === 'lb') {
     return numWeight * 0.45359237;
@@ -17,7 +17,7 @@ export const convertWeightToKg = (weight, unit) => {
 export const convertHeightToMeters = (unit, cm, m, ft, inch) => {
   if (unit === 'cm') {
     const numCm = parseFloat(cm);
-    if (isNaN(numCm) || numCm < 50 || numCm > 250) return null; // Realistic human height range 50cm - 250cm
+    if (isNaN(numCm) || numCm < 50 || numCm > 250) return null;
     return numCm / 100;
   }
 
@@ -40,7 +40,7 @@ export const convertHeightToMeters = (unit, cm, m, ft, inch) => {
 };
 
 /**
- * Calculates BMI value and identifies category with error feedback
+ * Calculates BMI value, category, and weight adjustment target
  */
 export const calculateBMI = ({ weight, weightUnit, heightUnit, heightCm, heightM, heightFt, heightIn }) => {
   const weightKg = convertWeightToKg(weight, weightUnit);
@@ -57,21 +57,48 @@ export const calculateBMI = ({ weight, weightUnit, heightUnit, heightCm, heightM
     return { error: 'Calculated BMI is out of normal human bounds. Please check your inputs.' };
   }
 
+  const minHealthyKg = 18.5 * (heightMeters * heightMeters);
+  const maxHealthyKg = 24.9 * (heightMeters * heightMeters);
+
   let category = '';
   let color = '';
+  let weightDifference = null;
 
   if (bmiValue < 18.5) {
     category = 'Underweight';
     color = 'var(--category-underweight)';
+    const diff = minHealthyKg - weightKg;
+    weightDifference = {
+      type: 'underweight',
+      kg: parseFloat(diff.toFixed(1)),
+      lbs: parseFloat((diff * 2.20462).toFixed(1))
+    };
   } else if (bmiValue >= 18.5 && bmiValue <= 24.9) {
     category = 'Healthy weight';
     color = 'var(--category-healthy)';
+    weightDifference = {
+      type: 'healthy',
+      kg: 0,
+      lbs: 0
+    };
   } else if (bmiValue >= 25.0 && bmiValue <= 29.9) {
     category = 'Overweight';
     color = 'var(--category-overweight)';
+    const diff = weightKg - maxHealthyKg;
+    weightDifference = {
+      type: 'overweight',
+      kg: parseFloat(diff.toFixed(1)),
+      lbs: parseFloat((diff * 2.20462).toFixed(1))
+    };
   } else {
     category = 'Obesity';
     color = 'var(--category-obese)';
+    const diff = weightKg - maxHealthyKg;
+    weightDifference = {
+      type: 'obese',
+      kg: parseFloat(diff.toFixed(1)),
+      lbs: parseFloat((diff * 2.20462).toFixed(1))
+    };
   }
 
   return {
@@ -79,6 +106,9 @@ export const calculateBMI = ({ weight, weightUnit, heightUnit, heightCm, heightM
     category,
     color,
     weightKg: parseFloat(weightKg.toFixed(1)),
-    heightMeters: parseFloat(heightMeters.toFixed(2))
+    heightMeters: parseFloat(heightMeters.toFixed(2)),
+    minHealthyKg: parseFloat(minHealthyKg.toFixed(1)),
+    maxHealthyKg: parseFloat(maxHealthyKg.toFixed(1)),
+    weightDifference
   };
 };

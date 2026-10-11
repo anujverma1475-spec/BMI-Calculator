@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const handleCalculate = () => {
-    setErrorMessage(''); // Clear previous error
+    setErrorMessage('');
 
     const result = calculateBMI({
       weight,
@@ -88,7 +88,6 @@ function App() {
     <div className="app-container">
       <Header />
 
-      {/* Error Notification Banner */}
       {errorMessage && (
         <div className="error-banner">
           <AlertCircle size={16} />
@@ -99,7 +98,7 @@ function App() {
       <div className="main-content-grid">
         {!bmiResult ? (
           <>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
               <CalculatorForm
                 gender={gender}
                 setGender={setGender}
@@ -121,15 +120,16 @@ function App() {
                 setAge={setAge}
                 onReset={handleReset}
               />
-              <History historyList={historyList} onClearHistory={handleClearHistory} />
-            </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
               <div className="action-area" style={{ width: '100%' }}>
                 <button className="btn-primary-calculate" onClick={handleCalculate}>
                   Calculate BMI
                 </button>
               </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+              <History historyList={historyList} onClearHistory={handleClearHistory} />
             </div>
           </>
         ) : (
